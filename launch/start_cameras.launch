@@ -1,0 +1,3 @@
+<launch>
+  <node name="start_cameras" pkg="demo" type="$(finde demo)/scripts/start_cameras.sh" />
+</launch>
