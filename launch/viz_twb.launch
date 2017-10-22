@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+ <launch>
+
+  <!--CAMERA VIEW SETUP-->
+  <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 world map 10" />
+
+  <!--ROBOT SETUP-->
+  <include file="$(find models)/launch/robot_viz.xml">
+    <arg name="description" value="$(find xacro)/xacro.py $(find models)/urdf/amiro.urdf" />
+    <arg name="use_joint_state_publisher" value="true"/>
+    <arg name="gui" value="false" />  
+    <arg name="model_prefix" value="twb0" />
+  </include>
+
+  <include file="$(find models)/launch/robot_viz.xml">
+    <arg name="description" value="$(find xacro)/xacro.py $(find models)/urdf/amiro.urdf" />
+    <arg name="use_joint_state_publisher" value="true"/>
+    <arg name="gui" value="false" />  
+    <arg name="model_prefix" value="twb12" />
+  </include>
+
+  <include file="$(find models)/launch/robot_viz.xml">
+    <arg name="description" value="$(find xacro)/xacro.py $(find models)/urdf/amiro.urdf" />
+    <arg name="use_joint_state_publisher" value="true"/>
+    <arg name="gui" value="false" />  
+    <arg name="model_prefix" value="twb13" />
+  </include>
+  
+  <include file="$(find models)/launch/robot_viz.xml">
+    <arg name="description" value="$(find xacro)/xacro.py $(find models)/urdf/amiro.urdf" />
+    <arg name="use_joint_state_publisher" value="true"/>
+    <arg name="gui" value="false" />  
+    <arg name="model_prefix" value="twb17" />
+  </include>
+  
+  <include file="$(find models)/launch/robot_viz.xml">
+    <arg name="description" value="$(find xacro)/xacro.py $(find models)/urdf/amiro.urdf" />
+    <arg name="use_joint_state_publisher" value="true"/>
+    <arg name="gui" value="false" /> 
+    <arg name="model_prefix" value="twb21" />
+  </include>
+  
+  
+  <!--TWB SETUP-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_model">
+    <param name="tf" value="0 0 0 0 0 0"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="twb/base_link"/>
+    <param name="rate" value="10.0"/>
+  </node>
+  <include file="$(find models)/launch/twb.xml">
+    <arg name="parent_frame_id" value="twb" />
+  </include>
+  
+  <!--TWB FLOOR IMAGE (with dummy image from camera)-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_floor">
+    <param name="tf" value="0 0 0 0 0 3.1415"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="floor"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+  <node pkg="usb_cam" type="usb_cam_node" name="usb_cam_node">
+    <param name="video_device" value="/dev/video0"/>
+    <param name="image_width"  value="1280"/>
+    <param name="image_height" value="720"/>
+    <param name="pixel_format" value="yuyv"/>
+  </node>
+<!--   <node name="image_proc" pkg="image_proc" type="image_proc" ns="usb_cam_node"/> -->
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find models)/twb.rviz" respawn="true" />
+
+ </launch>
