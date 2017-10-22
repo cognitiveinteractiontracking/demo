@@ -1,0 +1,10 @@
+<launch>
+
+  <node name="master_discovery" pkg="master_discovery_fkie" type="master_discovery">
+    <rosparam param="robot_hosts">['twbserver']</rosparam>
+  </node>
+
+  <node name="master_sync" pkg="master_sync_fkie" type="master_sync">
+    <rosparam param="sync_topics">['/genicam_cam*']</rosparam>
+  </node>
+</launch>

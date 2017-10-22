@@ -1,0 +1,12 @@
+<launch>
+  <arg name="CAM" default="1"/>
+
+  <node type="extract_images" name="image_saver$(arg CAM)" pkg="image_view" respawn="false" output="screen">
+    <remap from="image" to="/genicam_cam$(arg CAM)/cam" />
+
+    <param name="filename_format" value="/home/twbadmin/Pictures/chessboard/cam$(arg CAM)_%04d.png" />
+    <param name="sec_per_frame" value="1" />
+    <param name="encoding" value="rgb8" />
+  </node>
+
+</launch>  
