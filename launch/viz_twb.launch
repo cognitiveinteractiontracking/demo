@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
  <launch>
 
+  <!--MULTIMASTER CAMERA SETUP-->
+  <include file="$(find demo)/launch/master_sync_cam_publish.launch" />
+
   <!--CAMERA VIEW SETUP-->
   <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 world map 10" />
 
@@ -42,8 +45,11 @@
   
   
   <!--TWB SETUP-->
+  <arg name="twb_world_vs_image_offset_x" default="-0.145"/> <!--Found by trying out after calibration of cam5-2 -->
+  <arg name="twb_world_vs_image_offset_y" default="0.125"/> <!--Found by trying out after calibration of cam5-2 -->
   <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_model">
-    <param name="tf" value="0 0 0 0 0 0"/>
+<!--     <param name="tf" value="$(eval 0 - twb_world_vs_image_offset_x) $(eval 0 - twb_world_vs_image_offset_y) 0 0 0 0"/> -->
+    <param name="tf" value="0.145 -0.125 0 0 0 0"/>
     <param name="source_frame" value="world"/>
     <param name="target_frame" value="twb/base_link"/>
     <param name="rate" value="10.0"/>
@@ -53,21 +59,87 @@
   </include>
   
   <!--TWB FLOOR IMAGE (with dummy image from camera)-->
+  <arg name="twb_model_vs_image_offset_x" default="0.223526482897"/> <!--Found by trying out--> 
+  <arg name="twb_model_vs_image_offset_y" default="0.0945278311793"/> <!--Found by trying out-->
   <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_floor">
-    <param name="tf" value="0 0 0 0 0 3.1415"/>
+<!--     <param name="tf" value="$(eval arg('twb_model_vs_image_offset_x') - arg('twb_world_vs_image_offset_x')) $(eval arg('twb_model_vs_image_offset_y') - arg('twb_world_vs_image_offset_y')) 0 3.1415 0 0"/> -->
+<!--     <param name="tf" value="0.223526482897+0.145 0.0945278311793-0.125 0 3.1415 0 0"/> -->
+    <param name="tf" value="0.3685264829 -0.0304721688 0 3.1415 0 0"/>
     <param name="source_frame" value="world"/>
     <param name="target_frame" value="floor"/>
     <param name="rate" value="50.0"/>
   </node>
+
   
+  
+  
+  <!--TWB cam1-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam1">
+    <param name="tf" value="0.700381 1.65056 3.65692 3.10636 -0.0217796 0.0122934"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam1"/>
+    <param name="rate" value="50.0"/>
+  </node>
+
+  <!--TWB cam2-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam2">
+    <param name="tf" value="-1.35819 1.5723 3.70026 3.13005 0.0191518 -0.00149801"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam2"/>
+    <param name="rate" value="50.0"/>
+  </node>
+
+  <!--TWB cam3-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam3">
+    <param name="tf" value="-1.59799 -0.643416 3.63405 3.12804 -0.0270995 0.00854235"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam3"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+  <!--TWB cam4-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam4">
+    <param name="tf" value="0.672525 -0.792575 3.67222 3.13852 -0.017695 -0.00699832"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam4"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+
+  <!--TWB cam5-2-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam5_2">
+    <param name="tf" value="0.300187 0.061198 3.66301 3.13293 -0.00327001 0.00051294"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam5_2"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+  <!--TWB cam3-2-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam3_2">
+    <param name="tf" value="-1.3571 -1.34144 3.66265 3.12117 0.0396904 -0.00251701"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam3_2"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+  <!--TWB cam1-2-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam1_2">
+    <param name="tf" value="1.61334 1.3447 3.68389 -3.12521 -0.0753848 -0.00914719"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam1_2"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+  
+<!--  
   <node pkg="usb_cam" type="usb_cam_node" name="usb_cam_node">
     <param name="video_device" value="/dev/video0"/>
     <param name="image_width"  value="1280"/>
     <param name="image_height" value="720"/>
     <param name="pixel_format" value="yuyv"/>
   </node>
-<!--   <node name="image_proc" pkg="image_proc" type="image_proc" ns="usb_cam_node"/> -->
+  <node name="image_proc" pkg="image_proc" type="image_proc" ns="usb_cam_node"/> -->
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find models)/twb.rviz" respawn="true" />
+  <node name="rviz_twb" pkg="rviz" type="rviz" args="-d $(find models)/twb.rviz" respawn="true" />
 
  </launch>
