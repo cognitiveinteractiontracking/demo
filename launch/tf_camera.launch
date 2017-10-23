@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+ <launch>
+  
+  <!--TWB cam1-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam1">
+    <param name="tf" value="0.700381 1.65056 3.65692 3.10636 -0.0217796 0.0122934"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam1"/>
+    <param name="rate" value="50.0"/>
+  </node>
+
+  <!--TWB cam2-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam2">
+    <param name="tf" value="-1.35819 1.5723 3.70026 3.13005 0.0191518 -0.00149801"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam2"/>
+    <param name="rate" value="50.0"/>
+  </node>
+
+  <!--TWB cam3-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam3">
+    <param name="tf" value="-1.59799 -0.643416 3.63405 3.12804 -0.0270995 0.00854235"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam3"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+  <!--TWB cam4-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam4">
+    <param name="tf" value="0.672525 -0.792575 3.67222 3.13852 -0.017695 -0.00699832"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam4"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+  <!--TWB cam5-2-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam5_2">
+    <param name="tf" value="0.300187 0.061198 3.66301 3.13293 -0.00327001 0.00051294"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam5_2"/>
+    <param name="rate" value="50.0"/>
+  </node>
+  
+  <!--TWB cam4-2-->
+<!--  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam4_2">
+    <param name="tf" value="0.300187 0.061198 3.66301 3.13293 -0.00327001 0.00051294"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam4_2"/>
+    <param name="rate" value="50.0"/>
+  </node>-->
+
+  <!--TWB cam3-2-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam3_2">
+    <param name="tf" value="-1.3571 -1.34144 3.66265 3.12117 0.0396904 -0.00251701"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam3_2"/>
+    <param name="rate" value="50.0"/>
+  </node>
+
+  <!--TWB cam2-2-->
+<!--  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam2_2">
+    <param name="tf" value="0.300187 0.061198 3.66301 3.13293 -0.00327001 0.00051294"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam2_2"/>
+    <param name="rate" value="50.0"/>
+  </node>-->
+  
+  <!--TWB cam1-2-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_cam1_2">
+    <param name="tf" value="1.61334 1.3447 3.68389 -3.12521 -0.0753848 -0.00914719"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="cam1_2"/>
+    <param name="rate" value="50.0"/>
+  </node>
+
+</launch>
