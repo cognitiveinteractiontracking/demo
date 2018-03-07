@@ -2,7 +2,7 @@
  <launch>
 
   <!--MULTIMASTER CAMERA SETUP-->
-  <include file="$(find demo)/launch/master_sync_cam_publish.launch" />
+  <!--<include file="$(find demo)/launch/master_sync_cam_publish.launch" />-->
 
   <!--CAMERA VIEW SETUP-->
   <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 world map 10" />
