@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
  <launch>
 
+
   <!--MULTIMASTER CAMERA SETUP-->
   <!--<include file="$(find demo)/launch/master_sync_cam_publish.launch" />-->
 
@@ -11,35 +12,35 @@
   <include file="$(find models)/launch/robot_viz.xml">
     <arg name="description" value="$(find xacro)/xacro --inorder $(find models)/urdf/amiro.urdf" />
     <arg name="use_joint_state_publisher" value="true"/>
-    <arg name="gui" value="false" />  
+    <arg name="gui" value="false" />
     <arg name="model_prefix" value="base_link_0" />
   </include>
 
   <include file="$(find models)/launch/robot_viz.xml">
     <arg name="description" value="$(find xacro)/xacro --inorder $(find models)/urdf/amiro.urdf" />
     <arg name="use_joint_state_publisher" value="true"/>
-    <arg name="gui" value="false" />  
+    <arg name="gui" value="false" />
     <arg name="model_prefix" value="base_link_1" />
   </include>
 
   <include file="$(find models)/launch/robot_viz.xml">
     <arg name="description" value="$(find xacro)/xacro --inorder $(find models)/urdf/amiro.urdf" />
     <arg name="use_joint_state_publisher" value="true"/>
-    <arg name="gui" value="false" />  
+    <arg name="gui" value="false" />
     <arg name="model_prefix" value="base_link_2" />
   </include>
-  
+
   <include file="$(find models)/launch/robot_viz.xml">
     <arg name="description" value="$(find xacro)/xacro --inorder $(find models)/urdf/amiro.urdf" />
     <arg name="use_joint_state_publisher" value="true"/>
-    <arg name="gui" value="false" />  
+    <arg name="gui" value="false" />
     <arg name="model_prefix" value="base_link_3" />
   </include>
-  
+
   <include file="$(find models)/launch/robot_viz.xml">
     <arg name="description" value="$(find xacro)/xacro --inorder $(find models)/urdf/amiro.urdf" />
     <arg name="use_joint_state_publisher" value="true"/>
-    <arg name="gui" value="false" /> 
+    <arg name="gui" value="false" />
     <arg name="model_prefix" value="base_link_4" />
   </include>
 
@@ -56,9 +57,9 @@
   <include file="$(find models)/launch/twb.xml">
     <arg name="parent_frame_id" value="twb" />
   </include>
-  
+
   <!--TWB FLOOR IMAGE (with dummy image from camera)-->
-  <arg name="twb_model_vs_image_offset_x" default="0.223526482897"/> <!--Found by trying out--> 
+  <arg name="twb_model_vs_image_offset_x" default="0.223526482897"/> <!--Found by trying out-->
   <arg name="twb_model_vs_image_offset_y" default="0.0945278311793"/> <!--Found by trying out-->
   <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_floor">
 <!--     <param name="tf" value="$(eval arg('twb_model_vs_image_offset_x') - arg('twb_world_vs_image_offset_x')) $(eval arg('twb_model_vs_image_offset_y') - arg('twb_world_vs_image_offset_y')) 0 3.1415 0 0"/> -->
@@ -69,15 +70,30 @@
     <param name="rate" value="50.0"/>
   </node>
 
-  
-  <!--CAMERA TFs-->
-  <include file="$(find demo)/launch/tf_camera.launch" />
-  
-  <!--LOCALIZATION-->
-  <include file="$(find localization)/launch/start.launch" />
 
-  
-<!--  
+  <!--CAMERA TFs-->
+  <include file="$(find demo)/launch/tf_camera.launch">
+    <arg name="world_frame" value="world"/>
+
+  </include>
+
+  <!--LOCALIZATION-->
+  <include file="$(find localization)/launch/start.launch">
+    <arg name="tracker" value="artoolkit5_cam"/>
+    <!--<arg name="tracker" value="aruco3_node"/>-->
+  </include>
+
+  <!--All Aruco3 Tracker-->
+  <!--<include file="$(find demo)/launch/start_aruco3_all.launch">-->
+    <!--<arg name="dictionary" value="TAG36h11"/>-->
+  <!--</include>-->
+
+  <include file="$(find demo)/launch/start_artoolkit5_all.launch"/>
+
+  <!--GMAPPING-->
+  <!--<include file="$(find demo)/launch/gmapping.launch"/>-->
+
+<!--
   <node pkg="usb_cam" type="usb_cam_node" name="usb_cam_node">
     <param name="video_device" value="/dev/video0"/>
     <param name="image_width"  value="1280"/>
@@ -87,5 +103,7 @@
   <node name="image_proc" pkg="image_proc" type="image_proc" ns="usb_cam_node"/> -->
 
   <node name="rviz_twb" pkg="rviz" type="rviz" args="-d $(find models)/twb.rviz" respawn="true" />
+
+  <node name="image_proc" pkg="image_proc" type="image_proc" ns="genicam_cam5"/>
 
  </launch>

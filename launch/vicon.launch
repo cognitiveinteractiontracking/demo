@@ -5,7 +5,7 @@
     <param name="max_accel" value="10.0"/>
     <param name="publish_tf" value="true"/>
     <param name="fixed_frame_id" value="mocap"/>
-    <rosparam param="model_list">[]</rosparam>
+    <rosparam param="model_list">['MarkerEval', 'MarkerEval2', 'LiDAR_H', 'MarkerCalib']</rosparam>
     <!--remap from="vicon/model_name/odom" to="/model_name/odom"/-->
   </node>
 </launch>

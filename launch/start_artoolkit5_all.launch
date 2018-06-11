@@ -12,12 +12,12 @@
     <arg name="CAM" value="3"/>
   </include>
 
-  <!--<include file="$(find artoolkit5)/launch/calib_jai_m.launch">
+  <include file="$(find artoolkit5)/launch/calib_jai_m.launch">
     <arg name="CAM" value="4"/>
-  </include>-->
+  </include>
 
   <!--<include file="$(find artoolkit5)/launch/calib_jai_c.launch">-->
-    <!--<arg name="CAM" value="5"/>-->
+  <!--<arg name="CAM" value="5"/>-->
   <!--</include>-->
 
 </launch>

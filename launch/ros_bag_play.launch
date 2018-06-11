@@ -1,0 +1,101 @@
+<launch>
+
+  <param name="use_sim_time" value="1"/>
+
+  <!--<arg name="bagfile" default="/mnt/ssd_pcie/twb_eval/artoolkit5_size_100_36h11_id_0_degree_0_2018-03-23-18-26-41.bag"/>-->
+  <!--<arg name="bagfile" default="/mnt/ssd_pcie/twb_eval/surface_size_150_apriltag36h11_id_0_degree_0_cam1_2_3_4_5_2018-05-11-17-00-32.bag"/>-->
+  <arg name="bagfile" default="/mnt/ssd_pcie/twb_eval/surface_size_151_ar_matrix_code_3x3_artoolkit_id_0_degree_0_cam1_2_3_4_5_2018-05-11-17-07-21.bag"/>
+  <!--<arg name="bagfile" default="/mnt/ssd_pcie/twb_eval/artoolkit5_size_100_ar_matrix_code_3x3_id_0_degree_0_2018-03-23-15-09-16.bag"/>-->
+  <!--<arg name="bagfile" default="/mnt/ssd_pcie/twb_eval/artoolkit5_size_100_ar_matrix_code_3x3_apriltag36h11_id_0_degree_0_cam1_2_3_4_2018-04-30-20-22-29_dynamic.bag"/>-->
+  <!--<arg name="bagfile" default="/mnt/ssd_pcie/twb_eval/artoolkit5_size_100_ar_matrix_code_3x3_id_0_degree_0_2018-03-23-15-09-16.bag"/>-->
+
+  <arg name="artoolkit5" default="1"/> <!-- none (ARToolkit marker only) -->
+  <arg name="aruco2" default="0"/>   <!-- $(find aruco2)/dictionary/armarker_parity.dict -->
+  <arg name="aruco3" default="0"/> <!-- TAG36h11, $(find aruco2)/dictionary/armarker_parity.dict -->
+  <arg name="aruco3float" default="0"/> <!-- TAG36h11, $(find aruco2)/dictionary/armarker_parity.dict -->
+  <arg name="apriltag" default="0"/> <!-- none (Apriltag (aka TAG36h11) marker only) -->
+  <arg name="icl" default="0"/>   <!-- bch, icl1 -->
+  <arg name="speed" default="0.4"/>
+  <arg name="marker_size" default="151"/>
+
+
+  <node pkg="rosbag" type="play" name="rosbag_play" respawn="false" output="screen" required="false"
+        args="--clock -r $(arg speed) $(arg bagfile) --start=0"/>
+
+  <!--<arg name="markertype" default="TAG36h11"/>-->
+  <arg name="markertype" default="none"/>
+  <!--<arg name="markertype" default="$(find aruco2)/dictionary/armarker_parity.dict"/>-->
+
+
+  <!--<include file="$(find demo)/launch/tracking_record.xml">-->
+    <!--<arg name="CAM" value="1"/>-->
+    <!--<arg name="markertype" value="$(arg markertype)"/>-->
+    <!--<arg name="bagfile" value="$(arg bagfile)"/>-->
+    <!--<arg name="artoolkit5" value="$(arg artoolkit5)"/>-->
+    <!--<arg name="aruco2" value="$(arg aruco2)"/>-->
+    <!--<arg name="aruco3" value="$(arg aruco3)"/>-->
+    <!--<arg name="aruco3float" value="$(arg aruco3float)"/>-->
+    <!--<arg name="apriltag" value="$(arg apriltag)"/>-->
+    <!--<arg name="icl" value="$(arg icl)"/>-->
+    <!--<arg name="speed" value="$(arg speed)"/>-->
+    <!--<arg name="marker_size" value="$(arg marker_size)"/>-->
+  <!--</include>-->
+
+  <!--<include file="$(find demo)/launch/tracking_record.xml">-->
+    <!--<arg name="CAM" value="2"/>-->
+    <!--<arg name="markertype" value="$(arg markertype)"/>-->
+    <!--<arg name="bagfile" value="$(arg bagfile)"/>-->
+    <!--<arg name="artoolkit5" value="$(arg artoolkit5)"/>-->
+    <!--<arg name="aruco2" value="$(arg aruco2)"/>-->
+    <!--<arg name="aruco3" value="$(arg aruco3)"/>-->
+    <!--<arg name="aruco3float" value="$(arg aruco3float)"/>-->
+    <!--<arg name="apriltag" value="$(arg apriltag)"/>-->
+    <!--<arg name="icl" value="$(arg icl)"/>-->
+    <!--<arg name="speed" value="$(arg speed)"/>-->
+    <!--<arg name="marker_size" value="$(arg marker_size)"/>-->
+  <!--</include>-->
+
+  <include file="$(find demo)/launch/tracking_record.xml">
+    <arg name="CAM" value="5d_GR2GRAY"/>
+    <arg name="markertype" value="$(arg markertype)"/>
+    <arg name="bagfile" value="$(arg bagfile)"/>
+    <arg name="artoolkit5" value="$(arg artoolkit5)"/>
+    <arg name="aruco2" value="$(arg aruco2)"/>
+    <arg name="aruco3" value="$(arg aruco3)"/>
+    <arg name="aruco3float" value="$(arg aruco3float)"/>
+    <arg name="apriltag" value="$(arg apriltag)"/>
+    <arg name="icl" value="$(arg icl)"/>
+    <arg name="speed" value="$(arg speed)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <!--<include file="$(find demo)/launch/tracking_record.xml">-->
+    <!--<arg name="CAM" value="4"/>-->
+    <!--<arg name="markertype" value="$(arg markertype)"/>-->
+    <!--<arg name="bagfile" value="$(arg bagfile)"/>-->
+    <!--<arg name="artoolkit5" value="$(arg artoolkit5)"/>-->
+    <!--<arg name="aruco2" value="$(arg aruco2)"/>-->
+    <!--<arg name="aruco3" value="$(arg aruco3)"/>-->
+    <!--<arg name="aruco3float" value="$(arg aruco3float)"/>-->
+    <!--<arg name="apriltag" value="$(arg apriltag)"/>-->
+    <!--<arg name="icl" value="$(arg icl)"/>-->
+    <!--<arg name="speed" value="$(arg speed)"/>-->
+    <!--<arg name="marker_size" value="$(arg marker_size)"/>-->
+  <!--</include>-->
+
+  <!--COLOR_BayerGR2BGR = 49-->
+  <!--COLOR_BayerGR2GRAY = 89-->
+  <!--COLOR_BayerGR2BGR_VNG = 65-->
+  <!--COLOR_BayerGR2BGR_EA  = 138-->
+  <node type="image_demosaic_node" name="genicam_cam5d_GR2GRAY" pkg="image_demosaic" respawn="true" output="screen">
+    <!--<param name="demosaic_code" value="49"/>-->
+    <param name="demosaic_code" value="89"/>
+    <!--<param name="demosaic_code" value="65"/>-->
+    <!--<param name="demosaic_code" value="138"/>-->
+    <param name="topic_in_image" value="/genicam_cam5/image_raw"/>
+    <param name="topic_camera_info" value="/genicam_cam5/camera_info"/>
+    <param name="bgr2mono" value="1"/>
+    <param name="forward_image" value="0"/>
+    <param name="gaussian_demosaic" value="0"/>
+  </node>
+</launch>

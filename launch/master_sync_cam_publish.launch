@@ -5,6 +5,6 @@
   </node>
 
   <node name="master_sync" pkg="master_sync_fkie" type="master_sync">
-    <rosparam param="sync_topics">['/genicam_cam*','/artoolkit5_*', '/odometry/filtered/*']</rosparam>
+    <rosparam param="sync_topics">['/genicam_cam*', '/artoolkit5_*', '/icl_node*', '/apriltag_detector*', '/aruco2_node*', '/aruco3_node*', '/odometry/filtered/*', '/vicon*', '/amiro*']</rosparam>
   </node>
 </launch>

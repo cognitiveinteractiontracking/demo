@@ -1,0 +1,70 @@
+<launch>
+
+  <arg name="bagfile" default=""/>
+  <arg name="artoolkit5" default="0"/> <!-- none (ARToolkit marker only) -->
+  <arg name="aruco2" default="0"/>   <!-- $(find aruco2)/dictionary/armarker_parity.dict -->
+  <arg name="aruco3" default="1"/> <!-- TAG36h11, $(find aruco2)/dictionary/armarker_parity.dict -->
+  <arg name="aruco3float" default="0"/> <!-- TAG36h11, $(find aruco2)/dictionary/armarker_parity.dict -->
+  <arg name="apriltag" default="0"/> <!-- none (Apriltag (aka TAG36h11) marker only) -->
+  <arg name="icl" default="0"/>   <!-- bch, icl1 -->
+  <arg name="speed" default="0.2"/>
+  <arg name="markertype" default="TAG36h11"/>
+  <arg name="CAM" default="1"/>
+  <arg name="marker_size" default="100"/>
+
+
+  <arg name="tracker_prefix" default="artoolkit5_cam$(arg CAM)_2" if="$(arg artoolkit5)"/>
+  <arg name="tracker_prefix" default="aruco2_node$(arg CAM)_2" if="$(arg aruco2)"/>
+  <arg name="tracker_prefix" default="aruco3_node$(arg CAM)_2" if="$(arg aruco3)"/>
+  <arg name="tracker_prefix" default="aruco3_use_double_precision_pnp_off_node(arg CAM)_2" if="$(arg aruco3float)"/>
+  <arg name="tracker_prefix" default="icl_node$(arg CAM)_2" if="$(arg icl)"/>
+  <arg name="tracker_prefix" default="apriltag_detector$(arg CAM)_2" if="$(arg apriltag)"/>
+
+
+  <node name="image_proc" pkg="image_proc" type="image_proc" ns="genicam_cam$(arg CAM)"/>
+
+  <!--artoolkit 5-->
+  <include file="$(find artoolkit5)/launch/calib_jai_c.launch" if="$(arg artoolkit5)">
+    <arg name="CAM" value="$(arg CAM)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <!-- aruco2 -->
+  <include file="$(find aruco2)/launch/jai_m.launch" if="$(arg aruco2)">
+    <arg name="CAM" value="$(arg CAM)"/>
+    <arg name="dictionary" value="$(arg markertype)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <!-- aruco3 -->
+  <include file="$(find aruco3)/launch/jai_m.launch" if="$(arg aruco3)">
+    <arg name="CAM" value="$(arg CAM)"/>
+    <arg name="dictionary" value="$(arg markertype)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <!-- aruco3_use_double_precision_pnp_off -->
+  <!--<include file="$(find aruco3_use_double_precision_pnp_off)/launch/jai_m.launch" if="$(arg aruco3float)">-->
+    <!--<arg name="CAM" value="$(arg CAM)"/>-->
+    <!--<arg name="dictionary" value="$(arg markertype)"/>-->
+  <!--</include>-->
+
+  <!-- apriltag -->
+  <include file="$(find apriltags_ros)/launch/jai_m.launch" if="$(arg apriltag)">
+    <arg name="CAM" value="$(arg CAM)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <!-- icl -->
+  <include file="$(find icl)/launch/jai_m.launch" if="$(arg icl)">
+    <arg name="CAM" value="$(arg CAM)"/>
+    <arg name="markertype" value="$(arg markertype)"/>
+  </include>
+
+
+  <!-- save tracker output -->
+  <node pkg="rosbag" type="record" name="rosbag_record_$(arg tracker_prefix)" respawn="false" output="screen"
+        args="record -O $(arg bagfile)_speed_$(arg speed)_$(arg tracker_prefix).bag
+              -e '/$(arg tracker_prefix)/(.*)'"/>
+
+</launch>
