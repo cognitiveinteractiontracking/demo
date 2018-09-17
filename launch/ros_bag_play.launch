@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <launch>
 
   <param name="use_sim_time" value="1"/>
@@ -98,7 +97,6 @@
     <arg name="speed" value="$(arg speed)"/>
     <arg name="marker_size" value="$(arg marker_size)"/>
   </include>
-  
   <!--COLOR_BayerGR2BGR = 49-->
   <!--COLOR_BayerGR2GRAY = 89-->
   <!--COLOR_BayerGR2BGR_VNG = 65-->

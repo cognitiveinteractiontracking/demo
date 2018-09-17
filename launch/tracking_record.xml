@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <launch>
 
   <arg name="bagfile" default=""/>
@@ -42,6 +41,7 @@
     <arg name="CAM" value="$(arg CAM)"/>
     <arg name="dictionary" value="$(arg markertype)"/>
     <arg name="marker_size" value="$(arg marker_size)"/>
+<<<<<<< HEAD
     <arg name="gui" value="0"/>
     <arg name="show_threshold" value="0"/>
   </include>
