@@ -1,0 +1,66 @@
+<launch>
+
+  <arg name="tracker" default="no_tracker"/>
+  <arg name="size" default="100"/> <!--in mm-->
+  <arg name="marker" default="ar_matrix_code_3x3_apriltag36h11"/>
+  <arg name="id" default="0"/>
+  <arg name="degree" default="0"/>
+
+  <arg name="savefile_prefix" default="/mnt/ssd_pcie/twb_eval"/>
+
+  <arg name="camera_topic_prefix1" default="/genicam_cam1"/>
+  <arg name="camera_topic_prefix2" default="/genicam_cam2"/>
+  <arg name="camera_topic_prefix3" default="/genicam_cam3"/>
+  <arg name="camera_topic_prefix4" default="/genicam_cam4"/>
+  <arg name="camera_topic_prefix5" default="/genicam_cam5"/>
+
+
+  <arg name="tracker_topic_prefix1" default="/artoolkit5_cam1_2"/>
+  <arg name="tracker_topic_prefix2" default="/artoolkit5_cam2_2"/>
+  <arg name="tracker_topic_prefix3" default="/artoolkit5_cam3_2"/>
+  <arg name="tracker_topic_prefix4" default="/artoolkit5_cam4_2"/>
+  <arg name="tracker_topic_prefix5" default="/artoolkit5_cam5_2"/>
+
+  <arg name="vicon_topic_prefix" default="/vicon"/>
+
+  <arg name="amiro" default="/amiro4"/>
+
+  <!--<include file="$(find artoolkit5)/launch/calib_jai_m.launch">-->
+  <!--<arg name="CAM" value="1"/>-->
+  <!--</include>-->
+  <!--<include file="$(find artoolkit5)/launch/calib_jai_m.launch">-->
+  <!--<arg name="CAM" value="2"/>-->
+  <!--</include>-->
+  <!--<include file="$(find artoolkit5)/launch/calib_jai_m.launch">-->
+  <!--<arg name="CAM" value="3"/>-->
+  <!--</include>-->
+  <!--<include file="$(find artoolkit5)/launch/calib_jai_m.launch">-->
+  <!--<arg name="CAM" value="4"/>-->
+  <!--</include>-->
+  <!--<include file="$(find artoolkit5)/launch/calib_jai_c.launch">-->
+    <!--<arg name="CAM" value="5"/>-->
+  <!--</include>-->
+
+  <include file="$(find demo)/launch/vicon.launch"/>
+  <include file="$(find vicon_bridge)/launch/vicon.launch"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_record" respawn="false" output="screen"
+        args="record -o $(arg savefile_prefix)/$(arg tracker)_size_$(arg size)_$(arg marker)_id_$(arg id)_degree_$(arg degree)_cam1_2_3_4_5_amiro_with_orbbec
+        $(arg camera_topic_prefix1)/camera_info
+        $(arg camera_topic_prefix1)/image_raw
+        $(arg camera_topic_prefix2)/camera_info
+        $(arg camera_topic_prefix2)/image_raw
+        $(arg camera_topic_prefix3)/camera_info
+        $(arg camera_topic_prefix3)/image_raw
+        $(arg camera_topic_prefix4)/camera_info
+        $(arg camera_topic_prefix4)/image_raw
+        $(arg camera_topic_prefix5)/camera_info
+        $(arg camera_topic_prefix5)/image_raw
+        -e '$(arg vicon_topic_prefix)/(.*)'
+        '$(arg tracker_topic_prefix1)/(.*)'
+        '$(arg tracker_topic_prefix2)/(.*)'
+        '$(arg tracker_topic_prefix3)/(.*)'
+        '$(arg tracker_topic_prefix4)/(.*)'
+        '$(arg amiro)/(.*)'"/>
+
+</launch>

@@ -1,0 +1,4 @@
+<launch>
+  <!--<node name="start_cameras" pkg="demo" type="$(find demo)/scripts/start_cameras.sh" />-->
+  <include file="$(find cvb)/launch/jai_m.launch"><param</param></include>
+</launch>
