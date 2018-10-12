@@ -3,7 +3,7 @@
 
 
   <!--MULTIMASTER CAMERA SETUP-->
-  <!--<include file="$(find demo)/launch/master_sync_cam_publish.launch" />-->
+  <include file="$(find demo)/launch/master_sync_cam_publish.launch" />
 
   <!--CAMERA VIEW SETUP-->
   <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 world map 10" />
@@ -44,12 +44,19 @@
     <arg name="model_prefix" value="base_link_4" />
   </include>
 
+  <include file="$(find models)/launch/robot_viz.xml">
+    <arg name="description" value="$(find xacro)/xacro --inorder $(find models)/urdf/amiro.urdf" />
+    <arg name="use_joint_state_publisher" value="true"/>
+    <arg name="gui" value="false" />
+    <arg name="model_prefix" value="base_link_5" />
+  </include>
+
   <!--TWB SETUP-->
   <arg name="twb_world_vs_image_offset_x" default="-0.145"/> <!--Found by trying out after calibration of cam5-2 -->
   <arg name="twb_world_vs_image_offset_y" default="0.125"/> <!--Found by trying out after calibration of cam5-2 -->
   <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_model">
 <!--     <param name="tf" value="$(eval 0 - twb_world_vs_image_offset_x) $(eval 0 - twb_world_vs_image_offset_y) 0 0 0 0"/> -->
-    <param name="tf" value="0.145 -0.125 0 0 0 0"/>
+    <param name="tf" value="-0.15 0.04 0 0 0 0"/>
     <param name="source_frame" value="world"/>
     <param name="target_frame" value="twb/base_link"/>
     <param name="rate" value="10.0"/>
@@ -64,7 +71,7 @@
   <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_floor">
 <!--     <param name="tf" value="$(eval arg('twb_model_vs_image_offset_x') - arg('twb_world_vs_image_offset_x')) $(eval arg('twb_model_vs_image_offset_y') - arg('twb_world_vs_image_offset_y')) 0 3.1415 0 0"/> -->
 <!--     <param name="tf" value="0.223526482897+0.145 0.0945278311793-0.125 0 3.1415 0 0"/> -->
-    <param name="tf" value="0.158 0.19 0 3.1415 0 0"/>
+    <param name="tf" value="0.031 0.19 0 3.1415 0 0"/>
     <param name="source_frame" value="world"/>
     <param name="target_frame" value="floor"/>
     <param name="rate" value="50.0"/>

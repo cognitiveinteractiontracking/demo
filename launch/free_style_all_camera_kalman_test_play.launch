@@ -1,0 +1,103 @@
+<launch>
+
+
+  <env name="ROS_MASTER_URI" value="http://twbserver.ks:1111"/>
+  <param name="use_sim_time" value="true"/>
+
+  <!--As exampleview for the image-->
+  rosrun image_view image_view image:=/genicam_cam5/image_rect_color _image_transport:=compressed
+
+
+  <arg name="savefile_prefix" default="/mnt/ssd_pcie/twb_eval"/>
+  <arg name="savefilename" default="artoolkit5_size_100_ar_matrix_code_3x3_apriltag36h11_id_0_degree_0_cam1_2_3_4_2018-04-30-20-22-29_dynamic.bag"/>
+
+  <node pkg="rosbag" type="play" name="rosbag_play" respawn="false" output="screen" args="--rate=0.5 --start=0 --clock $(arg savefile_prefix)/$(arg savefilename) "/>
+
+  <!--DECOMPRESS IMAGE-->
+  <!--<node pkg="image_transport" type="republish" name="republish" respawn="false" output="screen" args="compressed in:=/genicam_cam5/image_rect_color raw out:=/genicam_cam5/image_rect_color_repub" />-->
+  <node name="image_proc" pkg="image_proc" type="image_proc" ns="genicam_cam5"/>
+
+  <!--CAMERA VIEW SETUP-->
+  <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 world map 10"/>
+
+  <!--<arg name="dictionary" default="TAG16h5"/>-->
+  <arg name="dictionary" default="TAG36h11"/>
+  <!--<arg name="dictionary" default="$(find aruco2)/dictionary/armarker_parity.dict"/>-->
+  <arg name="marker_size" default="100"/>
+
+  <include file="$(find aruco3)/launch/jai_m.launch">
+    <arg name="CAM" value="1"/>
+    <arg name="dictionary" value="$(arg dictionary)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <include file="$(find aruco3)/launch/jai_m.launch">
+    <arg name="CAM" value="2"/>
+    <arg name="dictionary" value="$(arg dictionary)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <include file="$(find aruco3)/launch/jai_m.launch">
+    <arg name="CAM" value="3"/>
+    <arg name="dictionary" value="$(arg dictionary)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <include file="$(find aruco3)/launch/jai_m.launch">
+    <arg name="CAM" value="4"/>
+    <arg name="dictionary" value="$(arg dictionary)"/>
+    <arg name="marker_size" value="$(arg marker_size)"/>
+  </include>
+
+  <!--ROBOT SETUP-->
+  <include file="$(find models)/launch/robot_viz.xml">
+    <arg name="description" value="$(find xacro)/xacro --inorder $(find models)/urdf/amiro.urdf"/>
+    <arg name="use_joint_state_publisher" value="true"/>
+    <arg name="gui" value="false"/>
+    <arg name="model_prefix" value="base_link_0"/>
+  </include>
+
+<!--  &lt;!&ndash;TWB SETUP-->
+  <arg name="twb_world_vs_image_offset_x" default="-0.145"/> <!--Found by trying out after calibration of cam5-2 -->
+  <arg name="twb_world_vs_image_offset_y" default="0.125"/> <!--Found by trying out after calibration of cam5-2 -->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_model">
+    <!--     <param name="tf" value="$(eval 0 - twb_world_vs_image_offset_x) $(eval 0 - twb_world_vs_image_offset_y) 0 0 0 0"/> -->
+    <param name="tf" value="-0.15 0.04 0 0 0 0"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="twb/base_link"/>
+    <param name="rate" value="10.0"/>
+  </node>
+  <include file="$(find models)/launch/twb.xml">
+    <arg name="parent_frame_id" value="twb"/>
+  </include>
+
+  <!--TWB FLOOR IMAGE (with dummy image from camera)-->
+  <arg name="twb_model_vs_image_offset_x" default="0.223526482897"/> <!--Found by trying out-->
+  <arg name="twb_model_vs_image_offset_y" default="0.0945278311793"/> <!--Found by trying out-->
+  <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_floor">
+    <!--     <param name="tf" value="$(eval arg('twb_model_vs_image_offset_x') - arg('twb_world_vs_image_offset_x')) $(eval arg('twb_model_vs_image_offset_y') - arg('twb_world_vs_image_offset_y')) 0 3.1415 0 0"/> -->
+    <!--     <param name="tf" value="0.223526482897+0.145 0.0945278311793-0.125 0 3.1415 0 0"/> -->
+    <param name="tf" value="0.031 0.19 0 3.1415 0 0"/>
+    <param name="source_frame" value="world"/>
+    <param name="target_frame" value="floor"/>
+    <param name="rate" value="50.0"/>
+  </node>-->
+
+  <!--CAMERA TFs-->
+  <include file="$(find demo)/launch/tf_camera_new.launch">
+    <arg name="world_frame" value="world"/>
+  </include>
+
+  <!--LOCALIZATION-->
+  <!--1 EKF with alle 4 tracker inputs-->
+  <arg name="tracker" default="aruco3_node"/>
+  <include file="$(find localization)/launch/generic_ekf.launch">
+    <arg name="id" value="0"/>
+    <arg name="tracker" value="$(arg tracker)"/>
+    <arg name="two_d_mode" value="false"/>
+  </include>
+
+  <!--RVIZ-->
+  <node name="rviz_twb" pkg="rviz" type="rviz" args="-d $(find demo)/rviz/free_style_demo.rviz" respawn="true"/>
+
+</launch>

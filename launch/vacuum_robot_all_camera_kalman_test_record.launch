@@ -1,0 +1,37 @@
+<launch>
+
+  <arg name="dictionary" default="TAG16h5"/>
+
+
+  <include file="$(find aruco3)/launch/jai_m.launch">
+    <arg name="CAM" value="1"/>
+    <arg name="dictionary" value="$(arg dictionary)"/>
+  </include>
+  <include file="$(find aruco3)/launch/jai_m.launch">
+    <arg name="CAM" value="2"/>
+    <arg name="dictionary" value="$(arg dictionary)"/>
+  </include>
+  <include file="$(find aruco3)/launch/jai_m.launch">
+    <arg name="CAM" value="3"/>
+    <arg name="dictionary" value="$(arg dictionary)"/>
+  </include>
+  <include file="$(find aruco3)/launch/jai_m.launch">
+    <arg name="CAM" value="4"/>
+    <arg name="dictionary" value="$(arg dictionary)"/>
+  </include>
+
+
+  <arg name="savefile_prefix" default="/mnt/filedump1/twb_demo_ekf"/>
+  <arg name="savefilename" default="cam12345_miele"/>
+  <arg name="camera_topic_prefix5" default="/genicam_cam5"/>
+  <arg name="tracker_topic_prefix" default="/aruco3_node"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_record" respawn="false" output="screen"
+        args="record -o $(arg savefile_prefix)/$(arg savefilename)
+        $(arg camera_topic_prefix5)/camera_info
+        $(arg camera_topic_prefix5)/image_rect_color/compressed
+         -e
+        '$(arg tracker_topic_prefix)(.*)'
+        "/>
+
+</launch>
