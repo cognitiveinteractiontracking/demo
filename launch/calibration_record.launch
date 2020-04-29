@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    
+  <param name="capability_group" value="calibration_record"/>
+
+  <node pkg="rosbag" type="record" name="rec_cam1" args="--duration=10 --output-name=$(find calibration)/bags/cam1 --regex /aruco3_node1_2/cam/(.*)/(.*) " />
+  <node pkg="rosbag" type="record" name="rec_cam2" args="--duration=10 --output-name=$(find calibration)/bags/cam2 --regex /aruco3_node2_2/cam/(.*)/(.*) " />
+  <node pkg="rosbag" type="record" name="rec_cam3" args="--duration=10 --output-name=$(find calibration)/bags/cam3 --regex /aruco3_node3_2/cam/(.*)/(.*) " />
+  <node pkg="rosbag" type="record" name="rec_cam4" args="--duration=10 --output-name=$(find calibration)/bags/cam4 --regex /aruco3_node4_2/cam/(.*)/(.*) " />
+
+</launch>
