@@ -1,4 +1,52 @@
+<?xml version="1.0"?>
 <launch>
-  <!--<node name="start_cameras" pkg="demo" type="$(find demo)/scripts/start_cameras.sh" />-->
-  <include file="$(find cvb)/launch/jai_m.launch"><param</param></include>
+    
+  <!--param name="capability_group" value="cameras"/-->
+  <arg name="trigger_mode_mono" default="0"/>
+  <arg name="ptp_timestamp_mono" default="0"/>
+  <arg name="fps_mono" default="20"/>
+  <arg name="trigger_mode_color" default="0"/>
+  <arg name="ptp_timestamp_color" default="0"/>
+  <arg name="fps_color" default="10"/>
+  
+  <include file="$(find genicam_cvb)/launch/jai_m.launch">
+    <arg name="fps" value="$(arg fps_mono)"/>
+    <arg name="CAM" value="1"/>
+    <param name="trigger_mode" value="$(arg trigger_mode_mono)"/>
+    <param name="ptp_timestamp" value="$(arg ptp_timestamp_mono)"/>
+    <arg name="camera_parameter_ns" value="config"/>
+  </include>
+  
+  <include file="$(find genicam_cvb)/launch/jai_m.launch">
+    <arg name="fps" value="$(arg fps_mono)"/>
+    <arg name="CAM" value="2"/>
+    <param name="trigger_mode" value="$(arg trigger_mode_mono)"/>
+    <param name="ptp_timestamp" value="$(arg ptp_timestamp_mono)"/>
+    <arg name="camera_parameter_ns" value="config"/>
+  </include>
+  
+  <include file="$(find genicam_cvb)/launch/jai_m.launch">
+    <arg name="fps" value="$(arg fps_mono)"/>
+    <arg name="CAM" value="3"/>
+    <param name="trigger_mode" value="$(arg trigger_mode_mono)"/>
+    <param name="ptp_timestamp" value="$(arg ptp_timestamp_mono)"/>
+    <arg name="camera_parameter_ns" value="config"/>
+  </include>
+  
+  <include file="$(find genicam_cvb)/launch/jai_m.launch">
+    <arg name="fps" value="$(arg fps_mono)"/>
+    <arg name="CAM" value="4"/>
+    <param name="trigger_mode" value="$(arg trigger_mode_mono)"/>
+    <param name="ptp_timestamp" value="$(arg ptp_timestamp_mono)"/>
+    <arg name="camera_parameter_ns" value="config"/>
+  </include>
+  
+  <include file="$(find genicam_cvb)/launch/jai_c.launch">
+    <arg name="fps" value="$(arg fps_color)"/>
+    <arg name="CAM" value="5"/>
+    <param name="trigger_mode" value="$(arg trigger_mode_color)"/>
+    <param name="ptp_timestamp" value="$(arg ptp_timestamp_color)"/>
+    <arg name="camera_parameter_ns" value="config"/>
+  </include>
+  
 </launch>
