@@ -50,11 +50,19 @@ vicon.launch | Vicon launch file which was once used for evaluation of CITrack
 
 ## Run the tracking
 
-- Start Kameras: TBD
+- Start Kameras: `roslaunch demo start_cameras_launch`
+  - Starts cameras without PTP and trigger synchronization by default. Therefore, frames are timestamped with system time (approx. 70 ms too 140 ms offset) and not captured simultaneously.
+  - Use `trigger_mode_mono:=1 ptp_timestamp_mono:=1 ptp_timestamp_color:=1` to setup PTP and trigger synchronization. Hint: Color camera has no trigger input, but we don't do tracking with it anyways.
+- Optional: Run the trigger synchronization [CITrigger](https://github.com/cognitiveinteractiontracking/citrigger)
 - Run the TF tree of the cameras
-  - Optional calibration: https://github.com/cognitiveinteractiontracking/calibration#citrack-calibration
+  - Optional: [extrinsic calibration](https://github.com/cognitiveinteractiontracking/calibration#citrack-calibration)
   - Run the TFs: `roslaunch demo tf_camera.launch`
-  - Load the current claibration (program should exit immediately): `roslaunch calibration calibration_load.launch`
+  - Load the current claibration (Hint: program should exit immediately): `roslaunch calibration calibration_load.launch`
 - Start tracking: `roslaunch demo start_aruco3_tracking.launch` (Hint: `gui:=0` reduces CPU load)
 - Run the fusion: `roslaunch demo start_localization.launch`
-- Run multimaster: `master_sync_cam_publish.launch`
+- Run multimaster (explained in this section): `master_sync_cam_publish.launch`
+
+## multimaster setup
+
+## AMiRo Setup
+
