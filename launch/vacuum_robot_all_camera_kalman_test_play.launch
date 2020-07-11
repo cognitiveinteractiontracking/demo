@@ -67,6 +67,6 @@
   </include>
 
   <!--RVIZ-->
-  <node name="rviz_twb" pkg="rviz" type="rviz" args="-d $(find demo)/rviz/cam12345_dirt_devil_demo.rviz" respawn="true"/>
+  <node name="rviz_twb" pkg="rviz" type="rviz" args="-d $(find demo)/rviz/vacuum_robot_all_camera_kalman_test.rviz" respawn="true"/>
 
 </launch>
