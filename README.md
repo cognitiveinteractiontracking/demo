@@ -4,7 +4,7 @@ This package contains various launch scripts to run the tracking.
 
 ## Launch files overview
 
-### Live Tracking
+### Live tracking
 
 file | note 
 --- | ---
@@ -29,7 +29,7 @@ free_style_all_camera_kalman_test_play.launch | Running around with a marker und
 
 ![vacuum_robot_all_camera_kalman_test_play](https://github.com/cognitiveinteractiontracking/demo/raw/master/images/vacuum_robot_all_camera_kalman_test_play.png "vacuum_robot_all_camera_kalman_test_play")
 
-### Further Examples
+### Further examples
 
 file | note 
 --- | --- 
@@ -60,9 +60,26 @@ vicon.launch | Vicon launch file which was once used for evaluation of CITrack
   - Load the current claibration (Hint: program should exit immediately): `roslaunch calibration calibration_load.launch`
 - Start tracking: `roslaunch demo start_aruco3_tracking.launch` (Hint: `gui:=0` reduces CPU load)
 - Run the fusion: `roslaunch demo start_localization.launch`
-- Run multimaster (explained in this section): `master_sync_cam_publish.launch`
+- Run multimaster (explained in [this](https://github.com/cognitiveinteractiontracking/demo/blob/master/README.md#multimaster-setup) section): `master_sync_cam_publish.launch`
 
-## multimaster setup
+## multimaster setup on a remote machine
 
-## AMiRo Setup
+Install or clone [multimaster_fkie](http://wiki.ros.org/multimaster_fkie) and run the following launch file to receive the necessary topics from the CItrack:
+
+```
+<launch>
+
+  <node name="master_discovery" pkg="master_discovery_fkie" type="master_discovery" respawn="true">
+    <rosparam param="robot_hosts">['twbserver.ks.techfak.uni-bielefeld.de']</rosparam>
+  </node>
+
+  <node name="master_sync" pkg="master_sync_fkie" type="master_sync" respawn="true">
+    <rosparam param="sync_topics">['/genicam_cam*', '/artoolkit5_*', '/icl_node*', '/apriltag_detector*', '/aruco2_node*', '/aruco3_node*', '/odometry/filtered/*', '/vicon*', '/amiro*']</rosparam>
+  </node>
+
+</launch>
+```
+
+
+## AMiRo setup
 
