@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!-- ONLY USABLE WITH FKIE NODE MANAGER -->
+<launch>
+
+    <group ns="facility">
+        <node name="off" pkg="demo" type="light_curl.sh" args="0">
+            <param name="capability_group" value="lights"/>
+        </node>
+        <node name="on" pkg="demo" type="light_curl.sh" args="1">
+            <param name="capability_group" value="lights"/>
+        </node>
+        
+        <group ns="camera">
+            <group ns="mono">
+                <group ns="1">
+                    <node name="off" pkg="demo" type="cam_curl_12346.sh" args="1 0"/>
+                    <node name="on" pkg="demo" type="cam_curl_12346.sh" args="1 1"/>
+                    <node name="restart" pkg="demo" type="cam_curl_12346.sh" args="1 2"/>
+                </group>
+                <group ns="2">
+                    <node name="off" pkg="demo" type="cam_curl_12346.sh" args="2 0"/>
+                    <node name="on" pkg="demo" type="cam_curl_12346.sh" args="2 1"/>
+                    <node name="restart" pkg="demo" type="cam_curl_12346.sh" args="2 2"/>
+                </group>
+                <group ns="3">
+                    <node name="off" pkg="demo" type="cam_curl_12346.sh" args="3 0"/>
+                    <node name="on" pkg="demo" type="cam_curl_12346.sh" args="3 1"/>
+                    <node name="restart" pkg="demo" type="cam_curl_12346.sh" args="3 2"/>
+                </group>
+                <group ns="4">
+                    <node name="off" pkg="demo" type="cam_curl_12346.sh" args="4 0"/>
+                    <node name="on" pkg="demo" type="cam_curl_12346.sh" args="4 1"/>
+                    <node name="restart" pkg="demo" type="cam_curl_12346.sh" args="4 2"/>
+                </group>
+                <group ns="all">
+                    <node name="off" pkg="demo" type="cam_curl_12346.sh" args="0"/>
+                    <node name="on" pkg="demo" type="cam_curl_12346.sh" args="1"/>
+                    <node name="restart" pkg="demo" type="cam_curl_12346.sh" args="2"/>
+                </group>
+            </group>
+            <group ns="color">
+                <node name="off" pkg="demo" type="cam_curl_12345.sh" args="4 0"/>
+                <node name="on" pkg="demo" type="cam_curl_12345.sh" args="4 1"/>
+                <node name="restart" pkg="demo" type="cam_curl_12345.sh" args="4 2"/>
+            </group>
+        </group>
+        
+    </group>
+    
+
+
+</launch>
