@@ -29,10 +29,11 @@ free_style_all_camera_kalman_test_play.launch | Running around with a marker und
 
 ![vacuum_robot_all_camera_kalman_test_play](https://github.com/cognitiveinteractiontracking/demo/raw/master/images/vacuum_robot_all_camera_kalman_test_play.png "vacuum_robot_all_camera_kalman_test_play")
 
-### Further examples
+### Further launch files
 
 file | note 
 --- | --- 
+start_facility.launch | Controls the power of lights and cameras. Only works with the [node_manager_fkie](http://wiki.ros.org/node_manager_fkie)
 calibration_record.launch | relates to [calibration](https://github.com/cognitiveinteractiontracking/calibration#citrack-calibration)
 hector_mapping.launch | Example for Hector mapping with a AMiRO in the CITRack
 image_saver.launch | Example for saving a few images from a camera's topic
