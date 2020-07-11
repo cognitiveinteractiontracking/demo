@@ -1,0 +1,87 @@
+!!python/unicode 'http://$LOCAL$:11311/':
+  address: $LOCAL$
+  configs:
+    !!python/unicode 'pkg://demo/launch/demo_rviz_twb.launch':
+      argv:
+      - twb_model_vs_image_offset_y:=0.0945278311793
+      - twb_model_vs_image_offset_x:=0.223526482897
+      - twb_world_vs_image_offset_x:=-0.145
+      - twb_world_vs_image_offset_y:=0.125
+      nodes:
+      - /robot_state_publisher_base_link_2
+      - /robot_state_publisher_base_link_3
+      - /heater4_tf
+      - /robot_state_publisher_base_link_1
+      - /robot_state_publisher_base_link_4
+      - /robot_state_publisher_base_link_5
+      - /joint_state_publisher_heater4
+      - /robot_state_publisher_base_link_0
+      - /joint_state_publisher_heater2
+      - /rviz_twb
+      - /robot_state_publisher_twb
+      - /tf_twb_model
+      - /heater1_tf
+      - /heater3_tf
+      - /joint_state_publisher_base_link_2
+      - /joint_state_publisher_base_link_3
+      - /joint_state_publisher_base_link_0
+      - /joint_state_publisher_base_link_1
+      - /joint_state_publisher_base_link_4
+      - /joint_state_publisher_base_link_5
+      - /joint_state_publisher_heater1
+      - /robot_state_publisher_heater4
+      - /tf_twb_floor
+      - /map_tf
+      - /robot_state_publisher_heater1
+      - /robot_state_publisher_heater2
+      - /robot_state_publisher_heater3
+      - /joint_state_publisher_heater3
+      - /joint_state_publisher_twb
+      - /heater2_tf
+    !!python/unicode 'pkg://demo/launch/start_aruco3_all.launch':
+      argv:
+      - dictionary:=TAG16h5
+      nodes:
+      - /aruco3_node1_2
+    !!python/unicode 'pkg://demo/launch/start_cameras.launch':
+      argv:
+      - fps_color:=10
+      - fps_mono:=20
+      - ptp_timestamp_color:=0
+      - ptp_timestamp_mono:=0
+      - trigger_mode_mono:=0
+      - trigger_mode_color:=0
+      nodes:
+      - /genicam_cam5/image_proc
+      - /genicam_cam5
+      - /genicam_cam1
+      - /genicam_cam1/image_proc
+    !!python/unicode 'pkg://demo/launch/start_facility.launch':
+      argv: []
+      default: false
+    !!python/unicode 'pkg://demo/launch/tf_camera_new.launch':
+      argv:
+      - world_frame:=world
+      nodes:
+      - /world_origin
+      - /tf_cam4
+      - /tf_cam3
+      - /tf_cam2
+      - /tf_cam1
+    !!python/unicode 'pkg://localization/launch/start.launch':
+      argv:
+      - tracker:=aruco3_node
+      nodes:
+      - /ekf_wheel_odometry_11
+      - /ekf_wheel_odometry_10
+      - /ekf_wheel_odometry_3
+      - /ekf_wheel_odometry_2
+      - /ekf_wheel_odometry_1
+      - /ekf_wheel_odometry_0
+      - /ekf_wheel_odometry_7
+      - /ekf_wheel_odometry_6
+      - /ekf_wheel_odometry_5
+      - /ekf_wheel_odometry_4
+      - /ekf_wheel_odometry_9
+      - /ekf_wheel_odometry_8
+  mastername: ''
