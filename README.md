@@ -9,8 +9,8 @@ This package contains various launch scripts to run the tracking.
 file | note 
 --- | ---
 start_cameras.launch | Start all cameras (1,2,3,4,5)
-start_aruco3_tracking.launch | Start tracking based on [aruco](https://docs.opencv.org/trunk/d5/dae/tutorial_aruco_detection.html) version 3
-start_aruco3_calibration.launch | Start tracking based on [aruco](https://docs.opencv.org/trunk/d5/dae/tutorial_aruco_detection.html) version 2
+start_aruco3_tracking.launch | Start tracking of common markers (small ones) based on [aruco](https://docs.opencv.org/trunk/d5/dae/tutorial_aruco_detection.html) version 3
+start_aruco3_calibration.launch | Start tracking of calibration markers (big ones) based on [aruco](https://docs.opencv.org/trunk/d5/dae/tutorial_aruco_detection.html) version 3
 start_artoolkit5_all.launch | Start tracking based on [ARToolkit](https://github.com/artoolkit/ARToolKit5) version 5
 start_localization.launch | Start fusion of tracking
 master_sync_cam_publish.launch | Running multimaster server
