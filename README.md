@@ -60,26 +60,6 @@ vicon.launch | Vicon launch file which was once used for evaluation of CITrack
   - Load the current claibration (Hint: program should exit immediately): `roslaunch calibration calibration_load.launch`
 - Start tracking: `roslaunch demo start_aruco3_tracking.launch` (Hint: `gui:=0` reduces CPU load)
 - Run the fusion: `roslaunch demo start_localization.launch`
-- Run multimaster (explained in [this](https://github.com/cognitiveinteractiontracking/demo/blob/master/README.md#multimaster-setup-on-a-remote-machine) section): `master_sync_cam_publish.launch`
+- Run multimaster if other clients want to receive necessary topics (example for [launch file](https://github.com/autonomoussystemsengineering/amiro_citrack/blob/master/amiro_in_the_loop/launch/master_sync.launch) on a client machine: `master_sync_cam_publish.launch`
 
-## multimaster setup on a remote machine
-
-Install or clone [multimaster_fkie](http://wiki.ros.org/multimaster_fkie) and run the following launch file to receive the necessary topics from the CItrack:
-
-```
-<launch>
-
-  <node name="master_discovery" pkg="master_discovery_fkie" type="master_discovery" respawn="true">
-    <rosparam param="robot_hosts">['twbserver.ks.techfak.uni-bielefeld.de']</rosparam>
-  </node>
-
-  <node name="master_sync" pkg="master_sync_fkie" type="master_sync" respawn="true">
-    <rosparam param="sync_topics">['/genicam_cam*', '/artoolkit5_*', '/icl_node*', '/apriltag_detector*', '/aruco2_node*', '/aruco3_node*', '/odometry/filtered/*', '/vicon*', '/amiro*']</rosparam>
-  </node>
-
-</launch>
-```
-
-
-## AMiRo setup
-
+Hint: Please look [here](https://github.com/autonomoussystemsengineering/amiro_citrack), If you want to control an AMiRo within the CITrack.
