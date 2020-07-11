@@ -25,7 +25,9 @@ vacuum_robot_all_camera_kalman_test_play.launch | MIELE RX1 cleaning a free area
 vacuum_robot_all_camera_kalman_test_record.launch | Recording for `vacuum_robot_all_camera_kalman_test_play.launch`
 free_style_all_camera_kalman_test_play.launch | Running around with a marker under all cameras (HINT: runs very slow from HDD)
 
-TBD: Include images
+![vacuum_robot_single_camera_kalman_test_play](https://github.com/cognitiveinteractiontracking/demo/raw/master/images/vacuum_robot_single_camera_kalman_test_play.png "vacuum_robot_single_camera_kalman_test_play")
+
+![vacuum_robot_all_camera_kalman_test_play](https://github.com/cognitiveinteractiontracking/demo/raw/master/images/vacuum_robot_all_camera_kalman_test_play.png "vacuum_robot_all_camera_kalman_test_play")
 
 ### Further Examples
 
