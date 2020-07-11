@@ -60,7 +60,7 @@ vicon.launch | Vicon launch file which was once used for evaluation of CITrack
   - Load the current claibration (Hint: program should exit immediately): `roslaunch calibration calibration_load.launch`
 - Start tracking: `roslaunch demo start_aruco3_tracking.launch` (Hint: `gui:=0` reduces CPU load)
 - Run the fusion: `roslaunch demo start_localization.launch`
-- Run multimaster (explained in [this](https://github.com/cognitiveinteractiontracking/demo/blob/master/README.md#multimaster-setup) section): `master_sync_cam_publish.launch`
+- Run multimaster (explained in [this](https://github.com/cognitiveinteractiontracking/demo/blob/master/README.md#multimaster-setup-on-a-remote-machine) section): `master_sync_cam_publish.launch`
 
 ## multimaster setup on a remote machine
 
