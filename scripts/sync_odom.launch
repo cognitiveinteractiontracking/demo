@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+
+
+  <env name="ROS_MASTER_URI" value="http://twbserver.ks:11311"/>
+  <param name="use_sim_time" value="true"/>
+
+  <arg name="savefile_prefix" default="$(find demo)/data_sets/dynamic_cam1_2_3_4"/>
+  <arg name="savefilename1" default="$(find demo)/launch/paper_viz/full_se3_error__2019-04-28-23-03-39.bag"/>
+  <?arg name="savefilename1" default="$(find demo)/launch/paper_viz/full_r3_error__2019-05-03-01-07-15.bag"/?>
+  <?arg name="savefilename1" default="$(find demo)/launch/paper_viz/full_se3_error_no_refine__2019-05-03-01-19-00.bag"/?>
+  <?arg name="savefilename1" default="$(find demo)/launch/paper_viz/sba_matlab_error__2019-05-03-00-49-04.bag"/?>
+  <arg name="savefilename2" default="$(find demo)/data_sets/dynamic_cam1_2_3_4/artoolkit5_size_100_ar_matrix_code_3x3_apriltag36h11_id_0_degree_0_cam1_2_3_4_2018-04-30-20-22-29_dynamic.bag_vicon.sync.bag"/>
+  
+  <node pkg="rosbag" type="play" name="rosbag_play" respawn="false" required="true" output="screen" args="--rate=1.0 --pause --delay=0.5 --clock $(arg savefilename1) $(arg savefilename2)"/>
+  
+  <!--RECORD Synced messages -->
+  <node pkg="demo" type="sync_odom.py" name="sync_odom" respawn="false" required="true" output="screen" args="/odometry/filtered/0 /vicon/MarkerEval2/odom $(find demo)/scripts/full_se3_error__2019-04-28-23-03-39_vicon_ekf_sync.bag"/>
+  <?node pkg="demo" type="sync_odom.py" name="sync_odom" respawn="false" required="true" output="screen" args="/odometry/filtered/0 /vicon/MarkerEval2/odom $(find demo)/scripts/full_r3_error__2019-05-03-01-07-15_vicon_ekf_sync.bag"/?>
+  <?node pkg="demo" type="sync_odom.py" name="sync_odom" respawn="false" required="true" output="screen" args="/odometry/filtered/0 /vicon/MarkerEval2/odom $(find demo)/scripts/full_se3_error_no_refine__2019-05-03-01-19-00_vicon_ekf_sync.bag"/?>
+  <?node pkg="demo" type="sync_odom.py" name="sync_odom" respawn="false" required="true" output="screen" args="/odometry/filtered/0 /vicon/MarkerEval2/odom $(find demo)/scripts/sba_matlab_error__2019-05-03-00-49-04_vicon_ekf_sync.bag"/?>
+  
+
+</launch>

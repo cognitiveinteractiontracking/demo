@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+
+
+  <env name="ROS_MASTER_URI" value="http://twbserver.ks:11311"/>
+  <param name="use_sim_time" value="true"/>
+
+  <arg name="savefile" default="/mnt/ssd_pcie/twb_eval/miele_vacuum_cleaner_robot_ekf_demo/cam12345_miele_2018-10-01-11-28-12.bag"/>
+  
+  <node pkg="rosbag" type="play" name="rosbag_play" respawn="false" required="true" output="screen" args="--rate=1.0 --hz=100 --delay=0.5 --pause --clock $(arg savefile)"/>
+  
+  <!--CLOCK with 20 Hz-->
+  <node pkg="demo" type="stamp_publisher.py" name="stamp_publisher" respawn="false" required="true" output="screen" args="20.0"/>
+  
+  <!--RECORD Synced messages -->
+  <node pkg="demo" type="sync_odom_with_clock.py" name="sync_odom_with_clock_1" respawn="false" required="true" output="screen" args="$(find demo)/scripts/cam12345_miele_2018-10-01-11-28-12.sync_aruco_1.bag /aruco3_node1_2/cam/odom/5"/>
+  <node pkg="demo" type="sync_odom_with_clock.py" name="sync_odom_with_clock_2" respawn="false" required="true" output="screen" args="$(find demo)/scripts/cam12345_miele_2018-10-01-11-28-12.sync_aruco_2.bag /aruco3_node2_2/cam/odom/5"/>
+  <node pkg="demo" type="sync_odom_with_clock.py" name="sync_odom_with_clock_3" respawn="false" required="true" output="screen" args="$(find demo)/scripts/cam12345_miele_2018-10-01-11-28-12.sync_aruco_3.bag /aruco3_node3_2/cam/odom/5"/>
+  <node pkg="demo" type="sync_odom_with_clock.py" name="sync_odom_with_clock_4" respawn="false" required="true" output="screen" args="$(find demo)/scripts/cam12345_miele_2018-10-01-11-28-12.sync_aruco_4.bag /aruco3_node4_2/cam/odom/5"/>
+
+
+</launch>
