@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
 
   <include file="$(find artoolkit5)/launch/calib_jai_m.launch">

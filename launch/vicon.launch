@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
   <node pkg="mocap_vicon" type="mocap_vicon_node" name="vicon" output="screen">
     <param name="server_address" value="alice.techfak.uni-bielefeld.de"/>

@@ -1,14 +1,10 @@
+<?xml version="1.0"?>
 <launch>
 
-
-  <env name="ROS_MASTER_URI" value="http://twbserver.ks:1111"/>
   <param name="use_sim_time" value="true"/>
 
-  <!--As exampleview for the image-->
-  rosrun image_view image_view image:=/genicam_cam5/image_rect_color _image_transport:=compressed
 
-
-  <arg name="savefile_prefix" default="/mnt/ssd_pcie/twb_eval"/>
+  <arg name="savefile_prefix" default="/mnt/filedump2/twb_eval_backup/dynamic_cam1_2_3_4"/>
   <arg name="savefilename" default="artoolkit5_size_100_ar_matrix_code_3x3_apriltag36h11_id_0_degree_0_cam1_2_3_4_2018-04-30-20-22-29_dynamic.bag"/>
 
   <node pkg="rosbag" type="play" name="rosbag_play" respawn="false" output="screen" args="--rate=0.5 --start=0 --clock $(arg savefile_prefix)/$(arg savefilename) "/>
@@ -57,11 +53,8 @@
     <arg name="model_prefix" value="base_link_0"/>
   </include>
 
-<!--  &lt;!&ndash;TWB SETUP-->
-  <arg name="twb_world_vs_image_offset_x" default="-0.145"/> <!--Found by trying out after calibration of cam5-2 -->
-  <arg name="twb_world_vs_image_offset_y" default="0.125"/> <!--Found by trying out after calibration of cam5-2 -->
-  <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_model">
-    <!--     <param name="tf" value="$(eval 0 - twb_world_vs_image_offset_x) $(eval 0 - twb_world_vs_image_offset_y) 0 0 0 0"/> -->
+  <!-- TWB SETUP-->
+  <node pkg="calibration" type="dynamic_transform_publisher" name="tf_twb_model">
     <param name="tf" value="-0.15 0.04 0 0 0 0"/>
     <param name="source_frame" value="world"/>
     <param name="target_frame" value="twb/base_link"/>
@@ -72,11 +65,7 @@
   </include>
 
   <!--TWB FLOOR IMAGE (with dummy image from camera)-->
-  <arg name="twb_model_vs_image_offset_x" default="0.223526482897"/> <!--Found by trying out-->
-  <arg name="twb_model_vs_image_offset_y" default="0.0945278311793"/> <!--Found by trying out-->
-  <node pkg="calib" type="dynamic_transform_publisher" name="tf_twb_floor">
-    <!--     <param name="tf" value="$(eval arg('twb_model_vs_image_offset_x') - arg('twb_world_vs_image_offset_x')) $(eval arg('twb_model_vs_image_offset_y') - arg('twb_world_vs_image_offset_y')) 0 3.1415 0 0"/> -->
-    <!--     <param name="tf" value="0.223526482897+0.145 0.0945278311793-0.125 0 3.1415 0 0"/> -->
+  <node pkg="calibration" type="dynamic_transform_publisher" name="tf_twb_floor">
     <param name="tf" value="0.031 0.19 0 3.1415 0 0"/>
     <param name="source_frame" value="world"/>
     <param name="target_frame" value="floor"/>
@@ -84,9 +73,20 @@
   </node>-->
 
   <!--CAMERA TFs-->
-  <include file="$(find demo)/launch/tf_camera_new.launch">
-    <arg name="world_frame" value="world"/>
-  </include>
+  <arg name="world_frame" default="map"/>
+
+  <arg name="cam1" value="1.5000   -1.5000   -1.7000    0 0         0         1.0"/>
+  <arg name="cam2" value="-1.3071   -1.5390   -1.8324 0.0365   -0.0412   -0.7036 0.7085"/>
+  <arg name="cam3" value="-1.6830    1.3908   -1.7717 0.0019   -0.0318   -0.0052 0.9995"/>
+  <arg name="cam4" value="1.4243    1.5012   -1.6682 -0.0122   -0.0055   -0.7130 0.7010"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="world_origin" args="0 0 2.2 0 0 3.14 $(arg world_frame) camera_origin 100" />
+
+  <!--CAMERA VIEW SETUP-->
+  <node pkg="tf" type="static_transform_publisher" name="cam1" args="$(arg cam1) camera_origin cam1 100" />
+  <node pkg="tf" type="static_transform_publisher" name="cam2" args="$(arg cam2) camera_origin cam2 100" />
+  <node pkg="tf" type="static_transform_publisher" name="cam3" args="$(arg cam3) camera_origin cam3 100" />
+  <node pkg="tf" type="static_transform_publisher" name="cam4" args="$(arg cam4) camera_origin cam4 100" />
 
   <!--LOCALIZATION-->
   <!--1 EKF with alle 4 tracker inputs-->

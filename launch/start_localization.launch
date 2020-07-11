@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<launch>
+    
+  <param name="capability_group" value="localization"/>
+
+  <!-- Can be 'artoolkit5_node', 'aruco2_node', or 'aruco3_node' -->
+  <arg name="tracker" default="aruco3_node"/>
+
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="0" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="1" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="2" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="3" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="4" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="5" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="6" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="7" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="8" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="9" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="10" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="11" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="12" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="13" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="14" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="15" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="16" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="17" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="18" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="19" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="20" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="21" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="22" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="23" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="24" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="25" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="26" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="27" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="28" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="29" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="30" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="31" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="32" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="33" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="34" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="35" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="36" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="37" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="38" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="39" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="40" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="41" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="42" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="43" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="44" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="45" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="46" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="47" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="48" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="49" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="50" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="51" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="52" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="53" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="54" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="55" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="56" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="57" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="58" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="59" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="60" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="61" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="62" /><arg name="tracker" value="$(arg tracker)"/></include>
+  <include file="$(find localization)/launch/generic_ekf.launch"><arg name="id" value="63" /><arg name="tracker" value="$(arg tracker)"/></include>
+
+</launch>
