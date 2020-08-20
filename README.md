@@ -51,7 +51,7 @@ vicon.launch | Vicon launch file which was once used for evaluation of CITrack
 
 ## Run the tracking
 
-- Start Kameras: `roslaunch demo start_cameras_launch`
+- Start Kameras: `roslaunch demo start_cameras.launch`
   - Starts cameras without PTP and trigger synchronization by default. Therefore, frames are timestamped with system time (approx. 70 ms too 140 ms offset) and not captured simultaneously.
   - Use `trigger_mode_mono:=1 ptp_timestamp_mono:=1 ptp_timestamp_color:=1` to setup PTP and trigger synchronization. Hint: Color camera has no trigger input, but we don't do tracking with it anyways.
 - Optional: Run the trigger synchronization [CITrigger](https://github.com/cognitiveinteractiontracking/citrigger)
