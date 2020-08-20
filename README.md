@@ -58,9 +58,10 @@ vicon.launch | Vicon launch file which was once used for evaluation of CITrack
 - Run the TF tree of the cameras
   - Optional: [extrinsic calibration](https://github.com/cognitiveinteractiontracking/calibration#citrack-calibration)
   - Run the TFs: `roslaunch demo tf_camera.launch`
-  - Load the current claibration (Hint: program should exit immediately): `roslaunch calibration calibration_load.launch`
+  - Load the current calibration (Hint: program should exit immediately): `roslaunch calibration calibration_load.launch`
 - Start tracking: `roslaunch demo start_aruco3_tracking.launch` (Hint: `gui:=0` reduces CPU load)
 - Run the fusion: `roslaunch demo start_localization.launch`
-- Run multimaster if other clients want to receive necessary topics (example for [launch file](https://github.com/autonomoussystemsengineering/amiro_citrack/blob/master/amiro_in_the_loop/launch/master_sync.launch) on a client machine: `master_sync_cam_publish.launch`
+- Run the visualization: `roslaunch demo start_viz.launch`
+- Optional multimaster: Run multimaster if other clients want to receive necessary topics (example for [launch file](https://github.com/autonomoussystemsengineering/amiro_citrack/blob/master/amiro_in_the_loop/launch/master_sync.launch) on a client machine: `master_sync_cam_publish.launch`
 
 Hint: Please look [here](https://github.com/autonomoussystemsengineering/amiro_citrack), If you want to control an AMiRo within the CITrack.
